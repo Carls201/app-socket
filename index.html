@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cliente Socket.io</title>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <input type="text" id="mensaje">
+  <button onclick="enviar()">Enviar</button>
+  <div id="respuestas"></div>
+
+  <script>
+    const socket = io('http://10.56.193.203:3000');
+    
+    socket.on('connect', () => {
+      console.log('Conectado al servidor');
+    });
+
+    socket.on('respuesta', (data) => {
+      document.getElementById('respuestas').innerHTML += `<p>${data}</p>`;
+    });
+
+    function enviar() {
+      const mensaje = document.getElementById('mensaje').value;
+      socket.emit('mensaje', mensaje);
+    }
+  </script>
+</body>
+</html>
