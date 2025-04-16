@@ -3,6 +3,7 @@ const { Server } = require('socket.io');
 
 // Crear servidor HTTP
 const server = http.createServer();
+const PORT = process.env.PORT || 3000; 
 const io = new Server(server, {
   cors: {
     origin: "*" // Permite conexiones desde cualquier origen (ajusta para producción)
@@ -41,6 +42,6 @@ server.on('request', (req, res) => {
 });
 
 // Iniciar servidor
-server.listen(3000, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log('Servidor Socket.io escuchando en puerto 3000');
 });
